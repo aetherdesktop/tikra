@@ -6,6 +6,7 @@ tikra_sources = [
   'StopwatchPage.vala',
   'TimerPage.vala',
   'WorldClockPage.vala',
+  'AddCityDialog.vala',
 ]
 
 tikra_deps = [

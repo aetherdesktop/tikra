@@ -13,5 +13,9 @@
       <default>false</default>
       <summary>Default window maximized state</summary>
     </key>
+    <key name="world-clock-cities" type="as">
+      <default>["New York|America/New_York","London|Europe/London","Paris|Europe/Paris","Moscow|Europe/Moscow","Dubai|Asia/Dubai","Delhi|Asia/Kolkata","Shanghai|Asia/Shanghai","Tokyo|Asia/Tokyo","Sydney|Australia/Sydney","Los Angeles|America/Los_Angeles"]</default>
+      <summary>World clock cities</summary>
+    </key>
   </schema>
 </schemalist>
