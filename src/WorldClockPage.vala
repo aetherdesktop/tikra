@@ -8,21 +8,20 @@ namespace Tikra {
         
         private struct TimeZoneInfo {
             string name;
-            string city;
-            string timezone;
+            string tz_id;
         }
-        
+
         private TimeZoneInfo[] timezones = {
-            {"New York", "America/New_York", "UTC-5"},
-            {"London", "Europe/London", "UTC+0"},
-            {"Paris", "Europe/Paris", "UTC+1"},
-            {"Moscow", "Europe/Moscow", "UTC+3"},
-            {"Dubai", "Asia/Dubai", "UTC+4"},
-            {"Delhi", "Asia/Kolkata", "UTC+5:30"},
-            {"Shanghai", "Asia/Shanghai", "UTC+8"},
-            {"Tokyo", "Asia/Tokyo", "UTC+9"},
-            {"Sydney", "Australia/Sydney", "UTC+10"},
-            {"Los Angeles", "America/Los_Angeles", "UTC-8"}
+            {"New York", "America/New_York"},
+            {"London", "Europe/London"},
+            {"Paris", "Europe/Paris"},
+            {"Moscow", "Europe/Moscow"},
+            {"Dubai", "Asia/Dubai"},
+            {"Delhi", "Asia/Kolkata"},
+            {"Shanghai", "Asia/Shanghai"},
+            {"Tokyo", "Asia/Tokyo"},
+            {"Sydney", "Australia/Sydney"},
+            {"Los Angeles", "America/Los_Angeles"}
         };
 
         public WorldClockPage () {
@@ -100,7 +99,7 @@ namespace Tikra {
                 time_box.append (date_label);
                 
                 row.add_suffix (time_box);
-                row.set_data ("timezone", tz.city);
+                row.set_data ("timezone", tz.tz_id);
                 row.set_data ("time_label", time_label);
                 row.set_data ("date_label", date_label);
                 
@@ -138,12 +137,11 @@ namespace Tikra {
             try {
                 var tz = new TimeZone.identifier (timezone);
                 var now = new DateTime.now (tz);
-                
                 time_label.label = now.format ("%H:%M:%S");
                 date_label.label = now.format ("%b %d");
             } catch (Error e) {
                 time_label.label = "--:--:--";
-                date_label.label = "Error";
+                date_label.label = "?";
             }
         }
 

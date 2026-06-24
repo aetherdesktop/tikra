@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/aether/tikra">
-    <file preprocess="xml-stripblanks">../ui/window.ui</file>
     <file>style.css</file>
   </gresource>
 </gresources>
