@@ -196,6 +196,7 @@ namespace Tikra {
         private void on_reset_clicked () {
             remaining_time = 0;
             reset_button.sensitive = false;
+            GLib.Application.get_default ().withdraw_notification ("timer-finished");
             
             // Enable spin buttons
             hours_spin.sensitive = true;
@@ -221,12 +222,16 @@ namespace Tikra {
                 minutes_spin.sensitive = true;
                 seconds_spin.sensitive = true;
                 
-                // Show timer finished notification
                 time_label.add_css_class ("error");
                 Timeout.add_seconds (3, () => {
                     time_label.remove_css_class ("error");
                     return Source.REMOVE;
                 });
+
+                var notification = new GLib.Notification ("Timer finished");
+                notification.set_body ("Your timer has ended");
+                notification.set_priority (GLib.NotificationPriority.HIGH);
+                GLib.Application.get_default ().send_notification ("timer-finished", notification);
                 
                 update_display ();
                 return Source.REMOVE;
