@@ -27,52 +27,33 @@ namespace Tikra {
             // Load custom CSS - using inline styles for now
             var css_provider = new Gtk.CssProvider ();
             var css_data = """
-            /* Tikra Clock Application Custom Styles */
-            
             .time-display {
               background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
               border: 1px solid rgba(255,255,255,0.1);
-              box-shadow: 0 8px 32px rgba(0,0,0,0.1);
             }
-            
+
             .time-large {
               font-size: 3.5em;
               font-weight: 300;
               letter-spacing: 0.1em;
             }
-            
-            .card {
-              border-radius: 16px;
-              transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            }
-            
-            .card:hover {
-              box-shadow: 0 12px 48px rgba(0,0,0,0.15);
-              transform: translateY(-2px);
-            }
-            
+
             .pill {
               min-width: 120px;
               min-height: 40px;
               border-radius: 20px;
               font-weight: 600;
-              transition: all 200ms ease;
             }
-            
-            .pill:hover {
-              transform: translateY(-1px);
-              box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-            }
-            
+
             .numeric {
               font-variant-numeric: tabular-nums;
               font-feature-settings: "tnum";
             }
-            
+
             .dim-label {
               opacity: 0.7;
             }
-            
+
             .accent {
               color: @accent_color;
               font-weight: 600;
