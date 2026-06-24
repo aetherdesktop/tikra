@@ -62,14 +62,20 @@ namespace Tikra {
             view_stack.get_page (timer_page).icon_name = "alarm-symbolic";
             view_stack.get_page (world_clock_page).icon_name = "mark-location-symbolic";
             
+            view_switcher_bar.reveal = false;
+
+            var breakpoint = new Adw.Breakpoint (
+                Adw.BreakpointCondition.parse ("max-width: 550sp")
+            );
+            breakpoint.add_setter (view_switcher, "visible", false);
+            breakpoint.add_setter (view_switcher_bar, "reveal", true);
+            add_breakpoint (breakpoint);
+
             var content_box = new Box (Orientation.VERTICAL, 0);
             content_box.append (header_bar);
             content_box.append (view_stack);
             content_box.append (view_switcher_bar);
-            
-            // Connect view switcher visibility - ViewSwitcher automatically handles narrow mode
-            // ViewSwitcherBar will show when the header ViewSwitcher is not visible
-            
+
             set_content (content_box);
         }
     }
