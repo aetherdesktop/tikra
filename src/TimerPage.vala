@@ -167,7 +167,7 @@ namespace Tikra {
             }
             
             is_running = true;
-            start_stop_button.label = "Pause";
+            start_stop_button.label = "Stop";
             start_stop_button.remove_css_class ("suggested-action");
             start_stop_button.add_css_class ("destructive-action");
             reset_button.sensitive = false;
