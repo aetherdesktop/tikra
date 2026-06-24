@@ -5,7 +5,9 @@ namespace Tikra {
     public class ClockPage : Box {
         private Label time_label;
         private Label date_label;
+        private Label day_label;
         private uint timeout_id;
+        private uint date_timeout_id;
 
         public ClockPage () {
             Object (orientation: Orientation.VERTICAL, spacing: 24);
@@ -61,8 +63,8 @@ namespace Tikra {
             date_label = new Label ("");
             date_label.add_css_class ("title-2");
             date_label.add_css_class ("dim-label");
-            
-            var day_label = new Label ("");
+
+            day_label = new Label ("");
             day_label.add_css_class ("title-3");
             day_label.add_css_class ("accent");
             
@@ -76,7 +78,7 @@ namespace Tikra {
             append (main_card);
             
             update_time ();
-            update_date (date_label, day_label);
+            update_date ();
         }
 
         private void start_clock () {
@@ -84,24 +86,9 @@ namespace Tikra {
                 update_time ();
                 return Source.CONTINUE;
             });
-            
-            // Update date every minute
-            Timeout.add_seconds (60, () => {
-                var child = get_first_child ();
-                if (child is Adw.Clamp) {
-                    var clamp = child as Adw.Clamp;
-                    var card_box = clamp.child as Box;
-                    if (card_box != null) {
-                        var date_box = card_box.get_last_child () as Box;
-                        if (date_box != null) {
-                            var date_label_child = date_box.get_first_child () as Label;
-                            var day_label_child = date_box.get_last_child () as Label;
-                            if (date_label_child != null) {
-                                update_date (date_label_child, day_label_child);
-                            }
-                        }
-                    }
-                }
+
+            date_timeout_id = Timeout.add_seconds (60, () => {
+                update_date ();
                 return Source.CONTINUE;
             });
         }
@@ -111,18 +98,20 @@ namespace Tikra {
             time_label.label = date_time.format ("%H:%M:%S");
         }
 
-        private void update_date (Label date_label, Label? day_label) {
+        private void update_date () {
             var date_time = new DateTime.now_local ();
             date_label.label = date_time.format ("%B %d, %Y");
-            if (day_label != null) {
-                day_label.label = date_time.format ("%A");
-            }
+            day_label.label = date_time.format ("%A");
         }
 
         public override void dispose () {
             if (timeout_id != 0) {
                 Source.remove (timeout_id);
                 timeout_id = 0;
+            }
+            if (date_timeout_id != 0) {
+                Source.remove (date_timeout_id);
+                date_timeout_id = 0;
             }
             base.dispose ();
         }
