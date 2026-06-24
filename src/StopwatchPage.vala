@@ -51,7 +51,7 @@ namespace Tikra {
             time_container.halign = Align.CENTER;
 
             time_label = new Label ("00:00:00");
-            time_label.add_css_class ("display-1");
+            time_label.add_css_class ("title-1");
             time_label.add_css_class ("numeric");
             time_label.add_css_class ("monospace");
             
